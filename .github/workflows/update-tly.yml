@@ -1,0 +1,91 @@
+name: TLY Fiyat Güncelle
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "30 18 * * 1-5"
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Repoyu indir
+        uses: actions/checkout@v4
+
+      - name: Python kurulumu
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: TLY verisini TEFAS'tan çek
+        run: |
+          python - <<'PY'
+          import requests
+          import json
+          from datetime import datetime
+
+          url = "https://www.tefas.gov.tr/api/funds/fonFiyatBilgiGetir"
+
+          payload = {
+              "fonKodu": "TLY",
+              "dil": "TR",
+              "periyod": 30
+          }
+
+          headers = {
+              "Content-Type": "application/json",
+              "User-Agent": "Mozilla/5.0"
+          }
+
+          r = requests.post(url, json=payload, headers=headers, timeout=30)
+          r.raise_for_status()
+
+          data = r.json()
+
+          result = data.get("resultList", [])
+
+          if not result:
+              raise Exception("TEFAS TLY verisi bulunamadı")
+
+          latest = result[-1]
+
+          price = (
+              latest.get("FON_FIYAT")
+              or latest.get("fonFiyat")
+              or latest.get("PRICE")
+          )
+
+          date = (
+              latest.get("TARIH")
+              or latest.get("tarih")
+              or latest.get("DATE")
+          )
+
+          if price is None:
+              raise Exception(f"Fiyat alanı bulunamadı: {latest}")
+
+          output = {
+              "fon": "TLY",
+              "fiyat": float(price),
+              "tarih": date,
+              "kaynak": "TEFAS",
+              "guncelleme": datetime.utcnow().isoformat()
+          }
+
+          with open("tly.json", "w", encoding="utf-8") as f:
+              json.dump(output, f, ensure_ascii=False, indent=2)
+
+          print(output)
+          PY
+
+      - name: Değişikliği kaydet
+        run: |
+          git config user.name "TLY Bot"
+          git config user.email "actions@github.com"
+          git add tly.json
+          git diff --cached --quiet || git commit -m "TLY fiyat güncellendi"
+          git push
