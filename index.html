@@ -1,344 +1,54 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TLY Portföy</title>
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-    body {
-      margin: 0;
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top, #18202b 0%, #090b0f 45%, #050608 100%);
-      color: #fff;
-      padding: 20px;
-    }
-    .container {
-      max-width: 900px;
-      margin: auto;
-    }
-    header {
-      padding: 25px 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .logo {
-      font-size: 25px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-    .badge {
-      background: #18241d;
-      color: #65d98b;
-      border: 1px solid #294d35;
-      padding: 7px 12px;
-      border-radius: 20px;
-      font-size: 12px;
-    }
-    .hero {
-      background: rgba(20, 24, 30, 0.9);
-      border: 1px solid #282e36;
-      border-radius: 24px;
-      padding: 30px;
-      margin-bottom: 18px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.35);
-    }
-    .fund-name {
-      color: #8e98a6;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-    .fund-code {
-      font-size: 38px;
-      font-weight: 800;
-      margin-bottom: 25px;
-    }
-    .price {
-      font-size: 48px;
-      font-weight: 800;
-      letter-spacing: -2px;
-    }
-    .change {
-      margin-top: 8px;
-      color: #64d98a;
-      font-size: 15px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-    .box {
-      background: rgba(20, 24, 30, 0.9);
-      border: 1px solid #282e36;
-      border-radius: 20px;
-      padding: 22px;
-    }
-    .label {
-      color: #7f8996;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-    .number {
-      font-size: 25px;
-      font-weight: 700;
-    }
-    .profit {
-      color: #64d98a;
-    }
-    .loss {
-      color: #ff6b6b;
-    }
-    .form {
-      margin-top: 18px;
-      background: rgba(20, 24, 30, 0.9);
-      border: 1px solid #282e36;
-      border-radius: 20px;
-      padding: 22px;
-    }
-    input {
-      width: 100%;
-      padding: 14px;
-      margin-top: 7px;
-      margin-bottom: 15px;
-      background: #0b0e12;
-      border: 1px solid #303640;
-      border-radius: 10px;
-      color: white;
-      font-size: 16px;
-      outline: none;
-    }
-    button {
-      width: 100%;
-      padding: 15px;
-      background: white;
-      color: black;
-      border: none;
-      border-radius: 11px;
-      font-size: 15px;
-      font-weight: 700;
-      cursor: pointer;
-    }
-    button:hover {
-      opacity: .9;
-    }
-    footer {
-      text-align: center;
-      color: #606975;
-      font-size: 12px;
-      padding: 25px;
-    }
-    @media (max-width: 600px) {
-      .grid {
-        grid-template-columns: 1fr;
-      }
-      .hero {
-        padding: 24px;
-      }
-      .price {
-        font-size: 40px;
-      }
-      .fund-code {
-        font-size: 32px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#07090d">
+<title>TLY Portföy</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 50% -10%,#202733 0,#0b0e13 42%,#050609 100%);color:#f5f7fa;font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Arial,sans-serif;padding:18px}.container{max-width:720px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;padding:10px 2px 22px}.logo{font-size:22px;font-weight:800;letter-spacing:-.7px}.badge{font-size:11px;color:#75e69a;background:#102219;border:1px solid #214b31;border-radius:99px;padding:7px 10px}.card{background:rgba(17,21,27,.9);border:1px solid #272e38;border-radius:25px;padding:24px;margin-bottom:14px;box-shadow:0 18px 55px rgba(0,0,0,.28);backdrop-filter:blur(14px)}.eyebrow,.label{color:#818b99;font-size:12px}.fund{font-size:40px;font-weight:850;letter-spacing:-1.5px;margin:5px 0 22px}.price{font-size:42px;font-weight:850;letter-spacing:-1.8px}.status{margin-top:9px;color:#6fda91;font-size:12px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.box{background:rgba(17,21,27,.9);border:1px solid #272e38;border-radius:19px;padding:18px}.number{font-size:20px;font-weight:750;margin-top:8px}.profit{color:#6fdf94}.loss{color:#ff7070}.form h2{font-size:20px;margin:0 0 6px}.form p{color:#7f8996;font-size:13px;margin:0 0 20px;line-height:1.5}label{display:block;margin:14px 0 7px}input{width:100%;padding:15px 14px;background:#090c11;border:1px solid #303844;border-radius:12px;color:#fff;font-size:16px;outline:none}input:focus{border-color:#647080}button{width:100%;margin-top:18px;padding:15px;border:0;border-radius:12px;background:#f5f6f8;color:#08090b;font-size:15px;font-weight:800}button.secondary{background:#151a21;color:#d7dce3;border:1px solid #2d3540;margin-top:9px}.hidden{display:none}.edit{color:#aeb6c1;font-size:12px;text-decoration:underline;margin:8px 0 20px;text-align:center;cursor:pointer}.saved{color:#70df95;text-align:center;font-size:12px;margin-top:11px;min-height:16px}footer{text-align:center;color:#58616d;font-size:11px;padding:18px}@media(max-width:520px){body{padding:13px}.card{padding:20px;border-radius:22px}.price{font-size:35px}.fund{font-size:34px}.number{font-size:18px}}
+</style>
 </head>
 <body>
 <div class="container">
-  <header>
-    <div class="logo">TLY PORTFÖY</div>
-    <div class="badge">● CANLI TAKİP</div>
-  </header>
-  <section class="hero">
-    <div class="fund-name">
-      TEFAS Yatırım Fonu
-    </div>
-    <div class="fund-code">
-      TLY
-    </div>
-    <div class="label">
-      Güncel Fon Fiyatı
-    </div>
-    <div class="price" id="currentPrice">
-      3.270,00 TL
-    </div>
-    <div class="change">
-      Veri bağlantısı hazırlanıyor...
-    </div>
-  </section>
-  <section class="grid">
-    <div class="box">
-      <div class="label">
-        Fon Adedi
-      </div>
-      <div class="number" id="quantity">
-        30
-      </div>
-    </div>
-    <div class="box">
-      <div class="label">
-        Alış Fiyatı
-      </div>
-      <div class="number">
-        1.260,00 TL
-      </div>
-    </div>
-    <div class="box">
-      <div class="label">
-        Toplam Maliyet
-      </div>
-      <div class="number" id="cost">
-        37.800,00 TL
-      </div>
-    </div>
-    <div class="box">
-      <div class="label">
-        Güncel Değer
-      </div>
-      <div class="number" id="value">
-        98.100,00 TL
-      </div>
-    </div>
-    <div class="box">
-      <div class="label">
-        Kâr / Zarar
-      </div>
-      <div class="number profit" id="profit">
-        +60.300,00 TL
-      </div>
-    </div>
-    <div class="box">
-      <div class="label">
-        Getiri
-      </div>
-      <div class="number profit" id="return">
-        +159,52%
-      </div>
-    </div>
-  </section>
-  <section class="form">
-    <h3>Portföy Bilgilerini Güncelle</h3>
-    <label class="label">
-      Fon Adedi
-    </label>
-    <input
-      type="number"
-      id="quantityInput"
-      value="30"
-      min="0"
-    >
-    <label class="label">
-      Ortalama Alış Fiyatı
-    </label>
-    <input
-      type="number"
-      id="buyInput"
-      value="1260"
-      min="0"
-      step="0.01"
-    >
-    <label class="label">
-      Güncel Fon Fiyatı
-    </label>
-    <input
-      type="number"
-      id="priceInput"
-      value="3270"
-      min="0"
-      step="0.01"
-    >
-    <button onclick="calculate()">
-      Portföyü Güncelle
-    </button>
-  </section>
-  <footer>
-    TLY Portföy Takip Sistemi
-  </footer>
+<header class="top"><div class="logo">TLY PORTFÖY</div><div class="badge">● TEFAS TAKİP</div></header>
+<section id="dashboard" class="card">
+<div class="eyebrow">Yatırım Fonu</div><div class="fund">TLY</div>
+<div class="label">Güncel Fon Fiyatı</div><div class="price" id="currentPrice">Yükleniyor…</div>
+<div class="status" id="dataStatus">TEFAS verisi alınıyor…</div>
+</section>
+<section id="stats" class="grid">
+<div class="box"><div class="label">Fon Adedi</div><div class="number" id="quantity">—</div></div>
+<div class="box"><div class="label">Ortalama Alış</div><div class="number" id="buy">—</div></div>
+<div class="box"><div class="label">Toplam Maliyet</div><div class="number" id="cost">—</div></div>
+<div class="box"><div class="label">Güncel Değer</div><div class="number" id="value">—</div></div>
+<div class="box"><div class="label">Kâr / Zarar</div><div class="number" id="profit">—</div></div>
+<div class="box"><div class="label">Toplam Getiri</div><div class="number" id="return">—</div></div>
+</section>
+<section id="formCard" class="card form">
+<h2>Portföyünü Oluştur</h2><p>Adet ve ortalama alış fiyatını gir. Bilgilerin bu cihazda kaydedilir; TEFAS fiyatı otomatik güncellenir.</p>
+<label class="label" for="quantityInput">Fon Adedi</label>
+<input id="quantityInput" type="number" min="0" step="0.0001" placeholder="Örn. 30">
+<label class="label" for="buyInput">Ortalama Alış Fiyatı (TL)</label>
+<input id="buyInput" type="number" min="0" step="0.00001" placeholder="Örn. 1260">
+<button onclick="savePortfolio()">Portföyü Kaydet</button>
+<button class="secondary" onclick="resetPortfolio()">Bilgileri Sıfırla</button>
+<div class="saved" id="saveStatus"></div>
+</section>
+<div id="editButton" class="edit hidden" onclick="showForm()">Portföy bilgilerini düzenle</div>
+<footer>TLY Portföy Takip Sistemi · TEFAS verisi</footer>
 </div>
 <script>
-function formatTL(value) {
-  return value.toLocaleString("tr-TR", {
-    minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  }) + " TL";
-}
-function calculate() {
-  const quantity =
-    Number(document.getElementById("quantityInput").value);
-  const buy =
-    Number(document.getElementById("buyInput").value);
-  const price =
-    Number(document.getElementById("priceInput").value);
-  const cost = quantity * buy;
-  const value = quantity * price;
-  const profit = value - cost;
-  const returnRate =
-    cost > 0 ? (profit / cost) * 100 : 0;
-  document.getElementById("quantity").innerText =
-    quantity.toLocaleString("tr-TR");
-  document.getElementById("cost").innerText =
-    formatTL(cost);
-  document.getElementById("value").innerText =
-    formatTL(value);
-  document.getElementById("profit").innerText =
-    (profit >= 0 ? "+" : "") + formatTL(profit);
-  document.getElementById("return").innerText =
-    (returnRate >= 0 ? "+" : "") +
-    returnRate.toLocaleString("tr-TR", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }) + "%";
-  document.getElementById("currentPrice").innerText =
-    formatTL(price);
-  const profitElement =
-    document.getElementById("profit");
-  const returnElement =
-    document.getElementById("return");
-  if (profit >= 0) {
-    profitElement.className = "number profit";
-    returnElement.className = "number profit";
-  } else {
-    profitElement.className = "number loss";
-    returnElement.className = "number loss";
-  }
-}
-  async function loadTEFAS() {
-  const status = document.getElementById("dataStatus");
-
-  try {
-    const response = await fetch("tly.json?nocache=" + Date.now());
-
-    if (!response.ok) {
-      throw new Error("TLY verisi bulunamadı");
-    }
-
-    const data = await response.json();
-
-    if (!data.fiyat) {
-      throw new Error("Geçerli fiyat bulunamadı");
-    }
-
-    document.getElementById("priceInput").value = data.fiyat;
-
-    calculate();
-
-    status.innerText =
-      "TEFAS • Son fiyat: " +
-      (data.tarih || "Güncel");
-
-  } catch (error) {
-    console.error(error);
-    status.innerText = "TEFAS verisi alınamadı";
-  }
-}
-
-loadTEFAS();
+const KEY="tlyPortfolio";let tefasPrice=0;
+function tl(v){return Number(v).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+" TL"}
+function pct(v){return(v>=0?"+":"")+Number(v).toLocaleString("tr-TR",{minimumFractionDigits:2,maximumFractionDigits:2})+"%"}
+function getPortfolio(){try{return JSON.parse(localStorage.getItem(KEY))}catch(e){return null}}
+function render(){const p=getPortfolio();if(!p){dashboard.classList.add("hidden");stats.classList.add("hidden");formCard.classList.remove("hidden");editButton.classList.add("hidden");return}dashboard.classList.remove("hidden");stats.classList.remove("hidden");formCard.classList.add("hidden");editButton.classList.remove("hidden");quantity.textContent=Number(p.quantity).toLocaleString("tr-TR",{maximumFractionDigits:4});buy.textContent=tl(p.buy);if(tefasPrice){const cost=p.quantity*p.buy,value=p.quantity*tefasPrice,profit=value-cost,rate=cost?(profit/cost)*100:0;document.getElementById("cost").textContent=tl(cost);document.getElementById("value").textContent=tl(value);document.getElementById("profit").textContent=(profit>=0?"+":"")+tl(profit);document.getElementById("return").textContent=pct(rate);["profit","return"].forEach(id=>document.getElementById(id).className="number "+(profit>=0?"profit":"loss"))}}
+function savePortfolio(){const q=Number(quantityInput.value),b=Number(buyInput.value);if(!q||q<0||!b||b<0){saveStatus.textContent="Lütfen adet ve alış fiyatını gir.";return}localStorage.setItem(KEY,JSON.stringify({quantity:q,buy:b}));saveStatus.textContent="Portföy kaydedildi.";render()}
+function showForm(){const p=getPortfolio();if(p){quantityInput.value=p.quantity;buyInput.value=p.buy}formCard.classList.remove("hidden");editButton.classList.add("hidden")}
+function resetPortfolio(){localStorage.removeItem(KEY);quantityInput.value="";buyInput.value="";saveStatus.textContent="Portföy bilgileri sıfırlandı.";render()}
+async function loadTEFAS(){try{const r=await fetch("tly.json?nocache="+Date.now());if(!r.ok)throw Error();const d=await r.json();tefasPrice=Number(d.fiyat);if(!tefasPrice)throw Error();currentPrice.textContent=tl(tefasPrice);dataStatus.textContent="TEFAS · "+(d.tarih||"Güncel");render()}catch(e){currentPrice.textContent="Veri alınamadı";dataStatus.textContent="TEFAS verisi şu an alınamadı";render()}}
+render();loadTEFAS();
 </script>
 </body>
 </html>
