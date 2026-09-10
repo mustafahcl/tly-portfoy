@@ -308,6 +308,37 @@ function calculate() {
     returnElement.className = "number loss";
   }
 }
+  async function loadTEFAS() {
+  const status = document.getElementById("dataStatus");
+
+  try {
+    const response = await fetch("tly.json?nocache=" + Date.now());
+
+    if (!response.ok) {
+      throw new Error("TLY verisi bulunamadı");
+    }
+
+    const data = await response.json();
+
+    if (!data.fiyat) {
+      throw new Error("Geçerli fiyat bulunamadı");
+    }
+
+    document.getElementById("priceInput").value = data.fiyat;
+
+    calculate();
+
+    status.innerText =
+      "TEFAS • Son fiyat: " +
+      (data.tarih || "Güncel");
+
+  } catch (error) {
+    console.error(error);
+    status.innerText = "TEFAS verisi alınamadı";
+  }
+}
+
+loadTEFAS();
 </script>
 </body>
 </html>
