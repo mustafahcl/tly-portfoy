@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TLY Portföy</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top, #18202b 0%, #090b0f 45%, #050608 100%);
+      color: #fff;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+    }
+    header {
+      padding: 25px 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .badge {
+      background: #18241d;
+      color: #65d98b;
+      border: 1px solid #294d35;
+      padding: 7px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    .hero {
+      background: rgba(20, 24, 30, 0.9);
+      border: 1px solid #282e36;
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 18px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .fund-name {
+      color: #8e98a6;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .fund-code {
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 25px;
+    }
+    .price {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -2px;
+    }
+    .change {
+      margin-top: 8px;
+      color: #64d98a;
+      font-size: 15px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+    .box {
+      background: rgba(20, 24, 30, 0.9);
+      border: 1px solid #282e36;
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .label {
+      color: #7f8996;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+    .number {
+      font-size: 25px;
+      font-weight: 700;
+    }
+    .profit {
+      color: #64d98a;
+    }
+    .loss {
+      color: #ff6b6b;
+    }
+    .form {
+      margin-top: 18px;
+      background: rgba(20, 24, 30, 0.9);
+      border: 1px solid #282e36;
+      border-radius: 20px;
+      padding: 22px;
+    }
+    input {
+      width: 100%;
+      padding: 14px;
+      margin-top: 7px;
+      margin-bottom: 15px;
+      background: #0b0e12;
+      border: 1px solid #303640;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      outline: none;
+    }
+    button {
+      width: 100%;
+      padding: 15px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 11px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:hover {
+      opacity: .9;
+    }
+    footer {
+      text-align: center;
+      color: #606975;
+      font-size: 12px;
+      padding: 25px;
+    }
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 24px;
+      }
+      .price {
+        font-size: 40px;
+      }
+      .fund-code {
+        font-size: 32px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <div class="logo">TLY PORTFÖY</div>
+    <div class="badge">● CANLI TAKİP</div>
+  </header>
+  <section class="hero">
+    <div class="fund-name">
+      TEFAS Yatırım Fonu
+    </div>
+    <div class="fund-code">
+      TLY
+    </div>
+    <div class="label">
+      Güncel Fon Fiyatı
+    </div>
+    <div class="price" id="currentPrice">
+      3.270,00 TL
+    </div>
+    <div class="change">
+      Veri bağlantısı hazırlanıyor...
+    </div>
+  </section>
+  <section class="grid">
+    <div class="box">
+      <div class="label">
+        Fon Adedi
+      </div>
+      <div class="number" id="quantity">
+        30
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">
+        Alış Fiyatı
+      </div>
+      <div class="number">
+        1.260,00 TL
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">
+        Toplam Maliyet
+      </div>
+      <div class="number" id="cost">
+        37.800,00 TL
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">
+        Güncel Değer
+      </div>
+      <div class="number" id="value">
+        98.100,00 TL
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">
+        Kâr / Zarar
+      </div>
+      <div class="number profit" id="profit">
+        +60.300,00 TL
+      </div>
+    </div>
+    <div class="box">
+      <div class="label">
+        Getiri
+      </div>
+      <div class="number profit" id="return">
+        +159,52%
+      </div>
+    </div>
+  </section>
+  <section class="form">
+    <h3>Portföy Bilgilerini Güncelle</h3>
+    <label class="label">
+      Fon Adedi
+    </label>
+    <input
+      type="number"
+      id="quantityInput"
+      value="30"
+      min="0"
+    >
+    <label class="label">
+      Ortalama Alış Fiyatı
+    </label>
+    <input
+      type="number"
+      id="buyInput"
+      value="1260"
+      min="0"
+      step="0.01"
+    >
+    <label class="label">
+      Güncel Fon Fiyatı
+    </label>
+    <input
+      type="number"
+      id="priceInput"
+      value="3270"
+      min="0"
+      step="0.01"
+    >
+    <button onclick="calculate()">
+      Portföyü Güncelle
+    </button>
+  </section>
+  <footer>
+    TLY Portföy Takip Sistemi
+  </footer>
+</div>
+<script>
+function formatTL(value) {
+  return value.toLocaleString("tr-TR", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  }) + " TL";
+}
+function calculate() {
+  const quantity =
+    Number(document.getElementById("quantityInput").value);
+  const buy =
+    Number(document.getElementById("buyInput").value);
+  const price =
+    Number(document.getElementById("priceInput").value);
+  const cost = quantity * buy;
+  const value = quantity * price;
+  const profit = value - cost;
+  const returnRate =
+    cost > 0 ? (profit / cost) * 100 : 0;
+  document.getElementById("quantity").innerText =
+    quantity.toLocaleString("tr-TR");
+  document.getElementById("cost").innerText =
+    formatTL(cost);
+  document.getElementById("value").innerText =
+    formatTL(value);
+  document.getElementById("profit").innerText =
+    (profit >= 0 ? "+" : "") + formatTL(profit);
+  document.getElementById("return").innerText =
+    (returnRate >= 0 ? "+" : "") +
+    returnRate.toLocaleString("tr-TR", {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + "%";
+  document.getElementById("currentPrice").innerText =
+    formatTL(price);
+  const profitElement =
+    document.getElementById("profit");
+  const returnElement =
+    document.getElementById("return");
+  if (profit >= 0) {
+    profitElement.className = "number profit";
+    returnElement.className = "number profit";
+  } else {
+    profitElement.className = "number loss";
+    returnElement.className = "number loss";
+  }
+}
+</script>
+</body>
+</html>
